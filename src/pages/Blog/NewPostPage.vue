@@ -40,6 +40,7 @@
 
 <script>
 import markdownEditor from 'vue-simplemde';
+//import editor from '@ckeditor/ckeditor5-vue';
 import store from '@/modules/store';
 
 export default {
