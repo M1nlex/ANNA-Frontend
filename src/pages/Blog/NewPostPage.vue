@@ -7,7 +7,8 @@
                 </h1>
 
                 <input v-model="title" type="text" name="title" placeholder="Title" />
-                <markdown-editor v-model="markdown" :configs="configs" />
+                <!--markdown-editor v-model="markdown" :configs="configs" /-->
+                <ckeditor v-model="markdown" :editor="editor" :configs="configs"></ckeditor>
             </div>
 
             <button type="submit" class="btn-green" @click.prevent="submit">
@@ -39,13 +40,15 @@
 </template>
 
 <script>
-import markdownEditor from 'vue-simplemde';
-//import editor from '@ckeditor/ckeditor5-vue';
+//import markdownEditor from 'vue-simplemde';
+import CKEditor from '@ckeditor/ckeditor5-vue';
 import store from '@/modules/store';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 export default {
     components: {
-        markdownEditor
+        //markdownEditor,
+        ckeditor: CKEditor.component
     },
     data() {
         return {
@@ -53,10 +56,17 @@ export default {
             markdown: '',
             isDraft: false,
             isPinned: false,
+            editor: ClassicEditor,
 
             configs: {
-                placeholder: 'Description...',
-                spellChecker: false
+                toolbar: [ 'bold', 'italic', '|', 'link' ],
+                image: {
+                    resizeUnit: '%',
+                    styles: [ 'full', 'side' ],
+                    upload: [ 'jpeg', 'png', 'gif', 'bmp', 'webp', 'tiff' ]
+                }
+                //placeholder: 'Description...',
+                //spellChecker: false
             }
         };
     },
